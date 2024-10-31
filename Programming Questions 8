@@ -1,0 +1,171 @@
+1. 
+full_name = input("Enter your first, middle, and last names: ")
+
+name_parts = full_name.split()
+initials = [name[0].upper() + '.' for name in name_parts]
+
+print(" ".join(initials))
+
+2.
+numbers = input("Enter a series of single-digit numbers: ")
+total = sum(int(digit) for digit in numbers)
+print("The sum is:", total)
+
+3.
+month_names = {
+    "01": "January", "02": "February", "03": "March", "04": "April",
+    "05": "May", "06": "June", "07": "July", "08": "August",
+    "09": "September", "10": "October", "11": "November", "12": "December"
+}
+
+date_input = input("Enter a date (mm/dd/yyyy): ")
+
+month, day, year = date_input.split("/")
+
+formatted_date = f"{month_names[month]} {int(day)}, {year}"
+print(formatted_date)
+
+4.
+morse_code = {
+    ' ': ' ', ',': '--..--', '.': '.-.-.-', '?': '..--..',
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+    '4': '....-', '5': '.....', '6': '-....', '7': '--...',
+    '8': '---..', '9': '----.', 'A': '.-', 'B': '-...',
+    'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+    'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+    'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.',
+    'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+    'S': '...', 'T': '-', 'U': '..-', 'V': '...-',
+    'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..'
+}
+
+text = input("Enter a string to convert to Morse code: ").upper()
+
+morse_translation = ""
+for char in text:
+    if char in morse_code:
+        morse_translation += morse_code[char] + " "
+
+print("Morse Code:", morse_translation.strip())
+
+5.
+def convert_to_number(phone):
+    mapping = {
+        'A': '2', 'B': '2', 'C': '2',
+        'D': '3', 'E': '3', 'F': '3',
+        'G': '4', 'H': '4', 'I': '4',
+        'J': '5', 'K': '5', 'L': '5',
+        'M': '6', 'N': '6', 'O': '6',
+        'P': '7', 'Q': '7', 'R': '7', 'S': '7',
+        'T': '8', 'U': '8', 'V': '8',
+        'W': '9', 'X': '9', 'Y': '9', 'Z': '9'
+    }
+    result = ''
+    for char in phone:
+        if char.isalpha():
+            result += mapping[char.upper()]
+        else:
+            result += char
+    return result
+
+phone = input("Enter a 10-character telephone number in the format XXX-XXX-XXXX: ")
+print(convert_to_number(phone))
+
+6.
+def average_words_per_sentence(filename):
+    file = open(filename, 'r')
+    sentences = file.readlines()
+    total_words = 0
+    for sentence in sentences:
+        total_words += len(sentence.split())
+    average_words = total_words / len(sentences) if sentences else 0
+    file.close()
+    return average_words
+
+filename = 'text.txt'
+print("Average number of words per sentence:", average_words_per_sentence(filename))
+
+7.
+def count_characters(filename):
+    uppercase_count = 0
+    lowercase_count = 0
+    digit_count = 0
+    whitespace_count = 0
+
+    file = open(filename, 'r')
+    contents = file.read()
+
+    for char in contents:
+        if char.isupper():
+            uppercase_count += 1
+        elif char.islower():
+            lowercase_count += 1
+        elif char.isdigit():
+            digit_count += 1
+        elif char.isspace():
+            whitespace_count += 1
+
+    file.close()
+    return uppercase_count, lowercase_count, digit_count, whitespace_count
+
+filename = 'text.txt'
+uppercase, lowercase, digits, whitespace = count_characters(filename)
+
+print("Uppercase letters:", uppercase)
+print("Lowercase letters:", lowercase)
+print("Digits:", digits)
+print("Whitespace characters:", whitespace)
+
+8.
+def capitalize_sentences(text):
+    sentences = text.split('. ')
+    capitalized_sentences = [sentence.capitalize() for sentence in sentences]
+    return '. '.join(capitalized_sentences)
+
+user_input = input("Enter a string: ")
+modified_string = capitalize_sentences(user_input)
+print(modified_string)
+
+9.
+def count_vowels(text):
+    vowels = "AEIOUaeiou"
+    count = 0
+    for char in text:
+        if char in vowels:
+            count += 1
+    return count
+
+def count_consonants(text):
+    consonants = "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz"
+    count = 0
+    for char in text:
+        if char in consonants:
+            count += 1
+    return count
+
+user_input = input("Enter a string: ")
+vowel_count = count_vowels(user_input)
+consonant_count = count_consonants(user_input)
+
+print("Number of vowels:", vowel_count)
+print("Number of consonants:", consonant_count)
+
+10.
+def most_frequent_character(text):
+    frequency = {}
+    
+    for char in text:
+        if char != ' ':  # Ignore spaces
+            if char in frequency:
+                frequency[char] += 1
+            else:
+                frequency[char] = 1
+    
+    most_frequent = max(frequency, key=frequency.get)
+    return most_frequent, frequency[most_frequent]
+
+user_input = input("Enter a string: ")
+char, count = most_frequent_character(user_input)
+
+print("The most frequent character is:", char)
+print("It appears", count, "times.")
